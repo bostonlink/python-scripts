@@ -32,7 +32,7 @@ for line in sigs:
 
     if sig_str.lower() in diced[1].lower():
 	print "*" * 80
-	print "Details of %s rule" % diced[1]
+	print "Details of %s rule" % diced[1].lstrip()
 	print "*" * 80 + "\n"
 	print "Snort sid-msg.map info\n"
 	print "Snort rule sid:  %s" % diced[0]
