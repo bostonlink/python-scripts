@@ -23,7 +23,7 @@ if len(sys.argv) != 2:
 else:
     sig_str = sys.argv[1]
 
-sigs = open("sid-msg.map", "r")
+sigs = open("rules/sid-msg.map", "r")
 
 # searching for user supplied string in sid-msg.map file
 for line in sigs:
