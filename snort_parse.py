@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 # Script to search through the 'sid-msg.map' file for snort signatures and displays all information about the signature
-# Author: bostonlink
+# Author: David Bressler (bl)
 # Date: 10/25/2012
 
 import os, sys
@@ -11,9 +11,7 @@ Something went wrong try again view usage:
 
 Usage: ./snort_parser.py [search string]
 Example: ./snort_parser.py \"et malware fun web products adware agent traffic\"
-
-Note: The snort ruleset must be in the CWD of the script and named 'rules' for the script
-to be able to parse them.
+Author: David Bressler
 """
 
 
@@ -23,7 +21,7 @@ if len(sys.argv) != 2:
 else:
     sig_str = sys.argv[1]
 
-sigs = open("rules/sid-msg.map", "r")
+sigs = open("sid-msg.map", "r")
 
 # searching for user supplied string in sid-msg.map file
 for line in sigs:
@@ -31,14 +29,22 @@ for line in sigs:
     diced = line.split('||')
 
     if sig_str.lower() in diced[1].lower():
-	print "*" * 80
-	print "Details of %s rule" % diced[1].lstrip()
-	print "*" * 80 + "\n"
-	print "Snort sid-msg.map info\n"
-	print "Snort rule sid:  %s" % diced[0]
-	print "Snort rule msg:  %s" % diced[1].lstrip()
-	print "Snort rule refs: %s" % diced[2].lstrip()
-	print "Additional info: %s" % diced[3].lstrip()
+	if len(diced) >= 4:
+	    print "*" * 80
+	    print "Details of %s rule" % diced[1].rstrip()
+	    print "*" * 80 + "\n"
+	    print "Snort sid-msg.map info\n"
+	    print "Snort rule sid:  %s" % diced[0]
+	    print "Snort rule msg:  %s" % diced[1].lstrip()
+	    print "Snort rule refs: %s" % diced[2].lstrip()
+	    print "Additional info: %s" % diced[3].lstrip()
+	else:
+	    print "*" * 80
+            print "Details of %s rule" % diced[1]
+            print "*" * 80 + "\n"
+            print "Snort sid-msg.map info\n"
+            print "Snort rule sid:  %s" % diced[0]
+            print "Snort rule msg:  %s" % diced[1].lstrip()
 
 	search_str = sig_str.split()
 
